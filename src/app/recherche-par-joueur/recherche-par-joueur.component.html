@@ -7,22 +7,25 @@
   </head>
   <body>
     <div class="container">
-
-        <!-- <form class="form-inline">
+      <!-- <form class="form-inline">
             <div class="form-group mx-sm-3 mb-2 mt-2 ">
             <label>Nom Joueur en tapant </label>
             <input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
             </div>
             </form> -->
 
-            <form class="form-inline">
-                <div class="form-group mx-sm-3 mb-2 mt-2 ">
-                <label>Nom Joueur en tapant</label>
-                <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control" >
-                </div>
-                </form>
-                
-            
+      <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2">
+          <label>Nom Joueur en tapant</label>
+          <input
+            #nom
+            [(ngModel)]="searchTerm"
+            name="searchTerm"
+            class="form-control"
+          />
+        </div>
+      </form>
+
       <div class="card shadow mb-4">
         <div class="card-body">
           <table class="table table-striped">
@@ -33,7 +36,11 @@
               <th>Equipe</th>
               <th>Position</th>
             </tr>
-            <tbody *ngFor="let joueur of (joueurs || []) | searchFilter: (searchTerm || '')">
+            <tbody
+              *ngFor="
+                let joueur of joueurs || [] | searchFilter : searchTerm || ''
+              "
+            >
               <tr>
                 <td>{{ joueur.idJoueur }}</td>
                 <td>{{ joueur.nomJoueur }}</td>
@@ -41,7 +48,7 @@
                 <td>{{ joueur.equipe?.nomEq }}</td>
                 <td>{{ joueur.position }}</td>
 
-             <!-- <td>
+                <!-- <td>
                   <a class="btn btn-danger" (click)="supprimerJoueur(joueur)"
                     >Supprimer</a
                   >
