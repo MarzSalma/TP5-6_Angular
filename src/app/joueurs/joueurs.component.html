@@ -16,6 +16,7 @@
               <th>Date de naissance</th>
               <th>Equipe</th>
               <th>Position</th>
+              <th>Email</th>
             </tr>
             <tbody *ngFor="let joueur of joueurs">
               <tr>
@@ -24,6 +25,7 @@
                 <td>{{ joueur.datenaissance | date : "dd/MM/yyyy" }}</td>
                 <td>{{ joueur.equipe?.nomEq }}</td>
                 <td>{{ joueur.position }}</td>
+                <td>{{ joueur.email }}</td>
 
                 <td>
                   <a class="btn btn-danger" (click)="supprimerJoueur(joueur)"

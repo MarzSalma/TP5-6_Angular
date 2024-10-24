@@ -27,6 +27,7 @@ export class JoueurService {
         datenaissance: new Date('05/02/1985'),
         equipe: { idEq: 3, nomEq: 'Al Nassr' },
         position: 'attaquant',
+        email:"salmamarzouk236@gmail.com"
       },
 
       {
@@ -35,6 +36,7 @@ export class JoueurService {
         datenaissance: new Date('09/09/1985'),
         equipe: { idEq: 1, nomEq: 'Real Madrid' },
         position: 'milieu',
+         email:"salmamarzouk236@gmail.com"
       },
       {
         idJoueur: 3,
@@ -42,6 +44,7 @@ export class JoueurService {
         datenaissance: new Date('1986/03/30'),
         equipe: { idEq: 2, nomEq: 'Seville FC' },
         position: 'defenseur central',
+         email:"salmamarzouk236@gmail.com"
       },
       {
         idJoueur: 4,
@@ -49,6 +52,7 @@ export class JoueurService {
         datenaissance: new Date('2003/05/29'),
         equipe: { idEq: 1, nomEq: 'Real Madrid' },
         position: 'milieu',
+         email:"salmamarzouk236@gmail.com"
       },
       {
         idJoueur: 5,
@@ -56,6 +60,7 @@ export class JoueurService {
         datenaissance: new Date('1992/05/15'),
         equipe: { idEq: 6, nomEq: 'Liverpool' },
         position: 'attaquant',
+         email:"salmamarzouk236@gmail.com"
       },
     ];
   }

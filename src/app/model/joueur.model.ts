@@ -6,5 +6,6 @@ export class Joueur {
     datenaissance? : Date ;
     equipe? : Equipe;
     position? : string;
+    email!:string;
     }
     

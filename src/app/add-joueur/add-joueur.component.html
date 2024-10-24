@@ -6,43 +6,74 @@
     <title>Ajouter-Joueur</title>
   </head>
   <body>
-    <h2>Ajouter un Joueur </h2>
-    
+    <h2>Ajouter un Joueur</h2>
+
     <div>
-      <form>
+      <form [formGroup]="myform">
         <div class="col-sm-2 col-md-2 col-lg-2">
           <label>ID Joueur</label>
           <input
-            type="text"
+            type="number"
             [(ngModel)]="newJoueur.idJoueur"
             name="idJoueur"
+            formControlName="idJoueur"
             class="form-control"
           />
         </div>
+        <span
+          *ngIf="
+            myform.controls['idJoueur'].hasError('required') &&
+            myform.controls['idJoueur'].touched
+          "
+          class="text-danger"
+        >
+          ID Joueur est obligatoire</span
+        >
         <div class="col-sm-4 col-md-4 col-lg-4">
           <label>Nom Joueur</label>
           <input
             type="text"
             [(ngModel)]="newJoueur.nomJoueur"
             name="nomJoueur"
+            formControlName="nomJoueur"
             class="form-control"
           />
         </div>
+        <span
+          *ngIf="
+            myform.controls['nomJoueur'].hasError('required') &&
+            myform.controls['nomJoueur'].touched
+          "
+          class="text-danger"
+        >
+          Nom Joueur est obligatoire</span
+        >
         <div class="col-sm-4 col-md-4 col-lg-4">
           <label>Date De Naissance</label>
           <input
             type="date"
             [(ngModel)]="newJoueur.datenaissance"
             name="datenaissance"
+            formControlName="datenaissance"
             class="form-control"
           />
         </div>
+        <span
+          *ngIf="
+            myform.controls['datenaissance'].hasError('required') &&
+            myform.controls['datenaissance'].touched
+          "
+          class="text-danger"
+        >
+          Date de naissance de Joueur est obligatoire</span
+        >
         <div class="col-sm-4 col-md-4 col-lg-4">
           <label>Equipe</label>
           <select
             class="form-control form-control-lg"
             id="idEq"
             name="idEq"
+            formControlName="equipe"
             [(ngModel)]="newIdEq"
           >
             <option *ngFor="let equipe of equipes" [value]="equipe.idEq">
@@ -50,17 +81,69 @@
             </option>
           </select>
         </div>
+        <span
+          *ngIf="
+            myform.controls['equipe'].hasError('required') &&
+            myform.controls['equipe'].touched
+          "
+          class="text-danger"
+        >
+          l'Equipe est obligatoire</span
+        >
         <div class="col-sm-4 col-md-4 col-lg-4">
           <label>Position</label>
           <input
             type="text"
             [(ngModel)]="newJoueur.position"
             name="position"
+            formControlName="position"
             class="form-control"
           />
         </div>
+        <span
+          *ngIf="
+            myform.controls['position'].hasError('required') &&
+            myform.controls['position'].touched
+          "
+          class="text-danger"
+        >
+          La Position de Joueur est obligatoire</span
+        >
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <label>Email</label>
+          <input
+            type="text"
+            [(ngModel)]="newJoueur.email"
+            name="email"
+            formControlName="email"
+            class="form-control"
+          />
+        </div>
+        <span
+          *ngIf="
+            myform.controls['email'].hasError('required') &&
+            myform.controls['email'].touched
+          "
+          class="text-danger"
+        >
+          L'email est obligatoire
+        </span>
+        <span
+          *ngIf="
+            myform.controls['email'].hasError('email') &&
+            myform.controls['email'].touched
+          "
+          class="text-danger"
+        >
+          L'email n'est pas valide
+        </span>
         <div class="mt-2">
-          <button type="submit" (click)="addJoueur()" class="btn btn-success">
+          <button
+            type="submit"
+            [disabled]="myform.invalid"
+            (click)="addJoueur()"
+            class="btn btn-success"
+          >
             Ajouter
           </button>
         </div>

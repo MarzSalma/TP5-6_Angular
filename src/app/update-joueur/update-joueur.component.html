@@ -10,26 +10,44 @@
       <div>
         <h2>Modifier un Joueur :</h2>
       </div>
-      <form>
+      <form [formGroup]="myform">
         <div class="col-sm-2 col-md-2 col-lg-2">
           <label>ID Joueur</label>
           <input
-            type="text"
+            type="number"
             [(ngModel)]="currentJoueur.idJoueur"
             name="idJoueur"
+            formControlName="idJoueur"
             class="form-control"
           />
         </div>
+        <span
+          *ngIf="
+            myform.controls['idJoueur'].hasError('required') &&
+            myform.controls['idJoueur'].touched
+          "
+          class="text-danger"
+          >Id Joueur est obligatoire</span
+        >
         <div class="col-sm-4 col-md-4 col-lg-4">
           <label>Nom Joueur</label>
           <input
             type="text"
             [(ngModel)]="currentJoueur.nomJoueur"
             name="nomJoueur"
+            formControlName="nomJoueur"
             class="form-control"
           />
         </div>
-
+        <span
+          *ngIf="
+            myform.controls['nomJoueur'].hasError('required') &&
+            myform.controls['nomJoueur'].touched
+          "
+          class="text-danger"
+        >
+          Le nom de joueur est obligatoire
+        </span>
         <div class="col-sm-4 col-md-4 col-lg-4">
           <label>Date de naissance</label>
           <input
@@ -37,15 +55,25 @@
             [ngModel]="currentJoueur.datenaissance | date : 'yyyy-MM-dd'"
             (ngModelChange)="currentJoueur.datenaissance = $event"
             name="datenaissance"
+            formControlName="datenaissance"
             class="form-control"
           />
         </div>
+        <span
+          *ngIf="
+            myform.controls['datenaissance'].hasError('required') &&
+            myform.controls['datenaissance'].touched
+          "
+          class="text-danger"
+          >La Date de Naissance est obligatoire</span
+        >
         <div class="col-sm-4 col-md-4 col-lg-4">
           <label>Equipe</label>
           <select
             class="form-control form-control-lg"
-            id="idCat"
-            name="idCat"
+            id="idEq"
+            name="idEq"
+            formControlName="idEq"
             [(ngModel)]="updateEqId"
           >
             <option *ngFor="let equipe of equipes" [value]="equipe.idEq">
@@ -53,6 +81,14 @@
             </option>
           </select>
         </div>
+        <span
+          *ngIf="
+            myform.controls['idEq'].hasError('required') &&
+            myform.controls['idEq'].touched
+          "
+          class="text-danger"
+          >L'equipe est obligatoire</span
+        >
 
         <div class="col-sm-4 col-md-4 col-lg-4">
           <label>Position</label>
@@ -60,13 +96,52 @@
             type="text"
             [(ngModel)]="currentJoueur.position"
             name="position"
+            formControlName="position"
             class="form-control"
           />
         </div>
+        <span
+          *ngIf="
+            myform.controls['position'].hasError('required') &&
+            myform.controls['position'].touched
+          "
+          class="text-danger"
+        >
+          La position est obligatoire
+        </span>
 
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <label>email</label>
+          <input
+            type="text"
+            [(ngModel)]="currentJoueur.email"
+            name="email"
+            formControlName="email"
+            class="form-control"
+          />
+        </div>
+        <span
+          *ngIf="
+            myform.controls['email'].hasError('required') &&
+            myform.controls['email'].touched
+          "
+          class="text-danger"
+        >
+          L'email est obligatoire
+        </span>
+        <span
+          *ngIf="
+            myform.controls['email'].hasError('email') &&
+            myform.controls['email'].touched
+          "
+          class="text-danger"
+        >
+          L'email n'est pas valide
+        </span>
         <div class="mt-2">
           <button
             type="submit"
+            [disabled]="myform.invalid"
             (click)="updateJoueur()"
             class="btn btn-success"
           >

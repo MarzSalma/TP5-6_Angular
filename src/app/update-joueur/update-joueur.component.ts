@@ -3,6 +3,7 @@ import { Joueur } from '../model/joueur.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JoueurService } from '../services/joueur.service';
 import { Equipe } from '../model/equipe.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-joueur',
@@ -10,19 +11,29 @@ import { Equipe } from '../model/equipe.model';
   styles: [],
 })
 export class UpdateJoueurComponent implements OnInit {
-  currentJoueur = new Joueur();
+  public currentJoueur = new Joueur();
   equipes!: Equipe[];
   updateEqId!: number;
-
+  myform!: FormGroup;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private joueurService: JoueurService
+    private joueurService: JoueurService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.equipes = this.joueurService.listeEquipes();
     // console.log(this.route.snapshot.params.id);
+    this.myform = this.formBuilder.group({
+      idJoueur: ['', [Validators.required, Validators.maxLength(15)]],
+      nomJoueur: [null, [Validators.required]],
+      datenaissance: ['', [Validators.required]],
+      equipe: ['', [Validators.required, Validators.minLength(3)]],
+      position: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+    });
+
     this.currentJoueur = this.joueurService.consulterJoueur(
       this.activatedRoute.snapshot.params['id']
     );

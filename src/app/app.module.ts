@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,8 +10,7 @@ import { UpdateJoueurComponent } from './update-joueur/update-joueur.component';
 import { RechercheParEquipeComponent } from './recherche-par-equipe/recherche-par-equipe.component';
 import { RechercheParJoueurComponent } from './recherche-par-joueur/recherche-par-joueur.component';
 import { SearchFilterPipe } from './search-filter.pipe';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+
 
 
 
@@ -24,9 +23,6 @@ import { LoginComponent } from './login/login.component';
     RechercheParEquipeComponent,
     RechercheParJoueurComponent,
     SearchFilterPipe,
-    RegisterComponent,
-    LoginComponent,
-    
 
   ],
   imports: [
@@ -35,7 +31,7 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ provideClientHydration()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
