@@ -9,12 +9,11 @@
     <h2>Ajouter un Joueur</h2>
 
     <div>
-      <form [formGroup]="myform">
+      <form [formGroup]="myform" (ngSubmit)="addJoueur()">
         <div class="col-sm-2 col-md-2 col-lg-2">
           <label>ID Joueur</label>
           <input
             type="number"
-            [(ngModel)]="newJoueur.idJoueur"
             name="idJoueur"
             formControlName="idJoueur"
             class="form-control"
@@ -33,12 +32,20 @@
           <label>Nom Joueur</label>
           <input
             type="text"
-            [(ngModel)]="newJoueur.nomJoueur"
             name="nomJoueur"
             formControlName="nomJoueur"
             class="form-control"
           />
         </div>
+        <span
+      *ngIf="
+        myform.controls['nomJoueur'].hasError('minlength') &&
+        myform.controls['nomJoueur'].touched
+      "
+      class="text-danger"
+    >
+      Le nom doit contenir au moins 3 caractères
+    </span>
         <span
           *ngIf="
             myform.controls['nomJoueur'].hasError('required') &&
@@ -52,7 +59,6 @@
           <label>Date De Naissance</label>
           <input
             type="date"
-            [(ngModel)]="newJoueur.datenaissance"
             name="datenaissance"
             formControlName="datenaissance"
             class="form-control"
@@ -74,7 +80,6 @@
             id="idEq"
             name="idEq"
             formControlName="equipe"
-            [(ngModel)]="newIdEq"
           >
             <option *ngFor="let equipe of equipes" [value]="equipe.idEq">
               {{ equipe.nomEq }}
@@ -94,7 +99,6 @@
           <label>Position</label>
           <input
             type="text"
-            [(ngModel)]="newJoueur.position"
             name="position"
             formControlName="position"
             class="form-control"
@@ -113,7 +117,6 @@
           <label>Email</label>
           <input
             type="text"
-            [(ngModel)]="newJoueur.email"
             name="email"
             formControlName="email"
             class="form-control"
@@ -131,7 +134,7 @@
         <span
           *ngIf="
             myform.controls['email'].hasError('email') &&
-            myform.controls['email'].touched
+            myform.controls['email'].touched 
           "
           class="text-danger"
         >
@@ -141,7 +144,7 @@
           <button
             type="submit"
             [disabled]="myform.invalid"
-            (click)="addJoueur()"
+            
             class="btn btn-success"
           >
             Ajouter

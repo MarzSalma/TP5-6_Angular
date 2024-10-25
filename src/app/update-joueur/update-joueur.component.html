@@ -10,7 +10,7 @@
       <div>
         <h2>Modifier un Joueur :</h2>
       </div>
-      <form [formGroup]="myform">
+      <form [formGroup]="myform" (ngSubmit)="updateJoueur()">
         <div class="col-sm-2 col-md-2 col-lg-2">
           <label>ID Joueur</label>
           <input
@@ -39,6 +39,15 @@
             class="form-control"
           />
         </div>
+        <span
+      *ngIf="
+        myform.controls['nomJoueur'].hasError('minlength') &&
+        myform.controls['nomJoueur'].touched
+      "
+      class="text-danger"
+    >
+      Le nom doit contenir au moins 3 caractères
+    </span>
         <span
           *ngIf="
             myform.controls['nomJoueur'].hasError('required') &&
@@ -73,7 +82,7 @@
             class="form-control form-control-lg"
             id="idEq"
             name="idEq"
-            formControlName="idEq"
+            formControlName="equipe"
             [(ngModel)]="updateEqId"
           >
             <option *ngFor="let equipe of equipes" [value]="equipe.idEq">
@@ -83,8 +92,8 @@
         </div>
         <span
           *ngIf="
-            myform.controls['idEq'].hasError('required') &&
-            myform.controls['idEq'].touched
+            myform.controls['equipe'].hasError('required') &&
+            myform.controls['equipe'].touched
           "
           class="text-danger"
           >L'equipe est obligatoire</span

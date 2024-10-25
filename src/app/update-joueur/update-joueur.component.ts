@@ -26,10 +26,10 @@ export class UpdateJoueurComponent implements OnInit {
     this.equipes = this.joueurService.listeEquipes();
     // console.log(this.route.snapshot.params.id);
     this.myform = this.formBuilder.group({
-      idJoueur: ['', [Validators.required, Validators.maxLength(15)]],
-      nomJoueur: [null, [Validators.required]],
+      idJoueur: ['', [Validators.required]],
+      nomJoueur: [null, [Validators.required, Validators.minLength(3)]],
       datenaissance: ['', [Validators.required]],
-      equipe: ['', [Validators.required, Validators.minLength(3)]],
+      equipe: ['', [Validators.required]],
       position: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
     });
