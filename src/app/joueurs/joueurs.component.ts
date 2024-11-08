@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Joueur } from '../model/joueur.model';
 import { JoueurService } from '../services/joueur.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-joueurs',
@@ -9,7 +10,10 @@ import { JoueurService } from '../services/joueur.service';
 export class JoueursComponent implements OnInit {
   joueurs?: Joueur[];
   currentJoueur?: Joueur;
-  constructor(private joueurService: JoueurService) {}
+  constructor(
+    private joueurService: JoueurService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.joueurs = this.joueurService.listeJoueurs();

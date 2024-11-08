@@ -10,6 +10,8 @@ import { UpdateJoueurComponent } from './update-joueur/update-joueur.component';
 import { RechercheParEquipeComponent } from './recherche-par-equipe/recherche-par-equipe.component';
 import { RechercheParJoueurComponent } from './recherche-par-joueur/recherche-par-joueur.component';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { LoginComponent } from './login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 
@@ -23,6 +25,8 @@ import { SearchFilterPipe } from './search-filter.pipe';
     RechercheParEquipeComponent,
     RechercheParJoueurComponent,
     SearchFilterPipe,
+    LoginComponent,
+    ForbiddenComponent,
 
   ],
   imports: [

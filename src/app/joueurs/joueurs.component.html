@@ -28,12 +28,16 @@
                 <td>{{ joueur.email }}</td>
 
                 <td>
-                  <a class="btn btn-danger" (click)="supprimerJoueur(joueur)"
+                  <a
+                    *ngIf="authService.isAdmin()"
+                    class="btn btn-danger"
+                    (click)="supprimerJoueur(joueur)"
                     >Supprimer</a
                   >
                 </td>
                 <td>
                   <a
+                    *ngIf="authService.isAdmin()"
                     class="btn btn-success"
                     [routerLink]="['/updateJoueur', joueur.idJoueur]"
                     >Modifier</a
