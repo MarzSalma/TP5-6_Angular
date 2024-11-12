@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Joueur } from '../model/joueur.model';
 import { Equipe } from '../model/equipe.model';
+import { Observable, of } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
@@ -112,4 +114,14 @@ export class JoueurService {
     });
     return this.joueursRecherche;
   }
+
+  ajouterEquipe(equipe: Equipe): Equipe {
+    const newId = this.equipes.length > 0 
+      ? Math.max(...this.equipes.map(eq => eq.idEq ?? 0)) + 1 
+      : 1;
+    equipe.idEq = newId;
+    this.equipes.push(equipe);
+    return equipe;
+  }
+  
 }

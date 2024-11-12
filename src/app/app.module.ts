@@ -12,6 +12,8 @@ import { RechercheParJoueurComponent } from './recherche-par-joueur/recherche-pa
 import { SearchFilterPipe } from './search-filter.pipe';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
+import { UpdateEquipeComponent } from './update-equipe/update-equipe.component';
 
 
 
@@ -27,6 +29,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     SearchFilterPipe,
     LoginComponent,
     ForbiddenComponent,
+    ListeEquipesComponent,
+    UpdateEquipeComponent,
 
   ],
   imports: [

@@ -1,4 +1,4 @@
 export class Equipe {
-    idEq? : number; // ou idCat? : number;
+    idEq? : number; 
     nomEq? : string;
     }

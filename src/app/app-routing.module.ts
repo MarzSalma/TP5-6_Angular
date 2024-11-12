@@ -8,6 +8,7 @@ import { RechercheParJoueurComponent } from './recherche-par-joueur/recherche-pa
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { JoueurGuard } from './joueur.guard';
+import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
 
 const routes: Routes = [
 
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'app-forbidden', component: ForbiddenComponent},
   {path : "add-joueur", component : AddJoueurComponent, canActivate:[JoueurGuard]},
+  {path: "listeCategories", component : ListeEquipesComponent},
+
 
 
 ];
