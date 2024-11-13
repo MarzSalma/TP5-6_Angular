@@ -10,7 +10,7 @@ import { JoueurService } from '../services/joueur.service';
 export class ListeEquipesComponent implements OnInit {
   equipes: Equipe[] = [];
 
-  ajout:boolean=true;
+  ajout: boolean = true;
 
   updatedEq: Equipe = { idEq: 0, nomEq: '' };
 
@@ -32,8 +32,21 @@ export class ListeEquipesComponent implements OnInit {
 
   equipeUpdated(equipe: Equipe): void {
     console.log('Équipe reçue du composant updatedequipe:', equipe);
-    this.joueurService.ajouterEquipe(equipe);
+    if (this.ajout) {
+      // Ajout de la nouvelle équipe
+      this.joueurService.ajouterEquipe(equipe);
+    } else {
+      // Modification de l'équipe existante
+      const index = this.equipes.findIndex((e) => e.idEq === equipe.idEq);
+      if (index !== -1) {
+        this.equipes[index] = equipe;
+      }
+      this.ajout = true; // Retourne en mode ajout
+    }
+
+    // Actualise la liste des équipes
     this.chargerEquipes();
+    this.resetEquipe(); // Réinitialise les champs pour un nouvel ajout/modification
   }
 
   chargerEquipes(): void {
@@ -41,8 +54,12 @@ export class ListeEquipesComponent implements OnInit {
     console.log(this.equipes);
   }
 
-  updateEq(equipe: Equipe){
-    this.updatedEq=equipe;
-    this.ajout=false;
+  updateEq(equipe: Equipe) {
+    this.updatedEq = equipe;
+    this.ajout = false;
+  }
+
+  resetEquipe() {
+    this.updatedEq = { idEq: 0, nomEq: '' };
   }
 }
