@@ -43,8 +43,11 @@
             <a class="dropdown-item" routerLink="/rechercheParJoueur"
               >Recherche Par Joueur</a
             >
-            <a class="dropdown-item" routerLink="/listeCategories"
-              >Gestion des catégories</a
+            <a
+              *ngIf="authService.isAdmin()"
+              class="dropdown-item"
+              routerLink="/listeCategories"
+              >Gestion des équipes</a
             >
           </div>
         </li>

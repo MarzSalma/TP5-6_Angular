@@ -11,12 +11,14 @@
     <div>
       <form [formGroup]="myform" (ngSubmit)="addJoueur()">
         <div class="col-sm-2 col-md-2 col-lg-2">
+          
           <label>ID Joueur</label>
           <input
             type="number"
             name="idJoueur"
             formControlName="idJoueur"
             class="form-control"
+            
           />
         </div>
         <span
@@ -38,14 +40,14 @@
           />
         </div>
         <span
-      *ngIf="
-        myform.controls['nomJoueur'].hasError('minlength') &&
-        myform.controls['nomJoueur'].touched
-      "
-      class="text-danger"
-    >
-      Le nom doit contenir au moins 3 caractères
-    </span>
+          *ngIf="
+            myform.controls['nomJoueur'].hasError('minlength') &&
+            myform.controls['nomJoueur'].touched
+          "
+          class="text-danger"
+        >
+          Le nom doit contenir au moins 3 caractères
+        </span>
         <span
           *ngIf="
             myform.controls['nomJoueur'].hasError('required') &&
@@ -78,7 +80,8 @@
           <select
             class="form-control form-control-lg"
             id="idEq"
-            name="idEq"
+            name="nomEq"
+            [(ngModel)]="newIdEq"
             formControlName="equipe"
           >
             <option *ngFor="let equipe of equipes" [value]="equipe.idEq">
@@ -134,7 +137,7 @@
         <span
           *ngIf="
             myform.controls['email'].hasError('email') &&
-            myform.controls['email'].touched 
+            myform.controls['email'].touched
           "
           class="text-danger"
         >
@@ -144,7 +147,6 @@
           <button
             type="submit"
             [disabled]="myform.invalid"
-            
             class="btn btn-success"
           >
             Ajouter

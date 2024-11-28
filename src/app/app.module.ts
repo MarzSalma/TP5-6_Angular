@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
 import { UpdateEquipeComponent } from './update-equipe/update-equipe.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -37,7 +38,9 @@ import { UpdateEquipeComponent } from './update-equipe/update-equipe.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+  
   ],
   providers: [ provideClientHydration()],
   bootstrap: [AppComponent]

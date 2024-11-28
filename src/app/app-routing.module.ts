@@ -11,23 +11,19 @@ import { JoueurGuard } from './joueur.guard';
 import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
 
 const routes: Routes = [
-
-  {path: "joueurs", component : JoueursComponent},
-  {path: "", redirectTo: "joueurs", pathMatch: "full"},
-  {path: "updateJoueur/:id", component: UpdateJoueurComponent},
-  {path: "rechercheParEquipe", component : RechercheParEquipeComponent},
-  {path: "rechercheParJoueur", component : RechercheParJoueurComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'app-forbidden', component: ForbiddenComponent},
-  {path : "add-joueur", component : AddJoueurComponent, canActivate:[JoueurGuard]},
-  {path: "listeCategories", component : ListeEquipesComponent},
-
-
-
+  { path: 'joueurs', component: JoueursComponent },
+  { path: '', redirectTo: 'joueurs', pathMatch: 'full' },
+  { path: 'updateJoueur/:id', component: UpdateJoueurComponent },
+  { path: 'rechercheParEquipe', component: RechercheParEquipeComponent },
+  { path: 'rechercheParJoueur',component: RechercheParJoueurComponent,},
+  { path: 'login', component: LoginComponent },
+  { path: 'app-forbidden', component: ForbiddenComponent },
+  { path: 'add-joueur', component: AddJoueurComponent,canActivate: [JoueurGuard],},
+  { path: 'listeCategories', component: ListeEquipesComponent, canActivate: [JoueurGuard],},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

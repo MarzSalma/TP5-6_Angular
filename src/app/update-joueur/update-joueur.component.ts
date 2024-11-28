@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Joueur } from '../model/joueur.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JoueurService } from '../services/joueur.service';
@@ -15,6 +15,7 @@ export class UpdateJoueurComponent implements OnInit {
   equipes!: Equipe[];
   updateEqId!: number;
   myform!: FormGroup;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -22,9 +23,26 @@ export class UpdateJoueurComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
+
+
   ngOnInit(): void {
-    this.equipes = this.joueurService.listeEquipes();
-    // console.log(this.route.snapshot.params.id);
+    // this.equipes = this.joueurService.listeEquipes();
+    //  console.log(this.route.snapshot.params.id);
+
+    this.joueurService.listeEquipes().subscribe((eq) => {
+      console.log(eq);
+      this.equipes = eq._embedded.equipes;
+    });
+    
+    this.joueurService
+      .consulterJoueur(this.activatedRoute.snapshot.params['id'])
+      .subscribe((j) => {
+        this.currentJoueur = j;
+        this.updateEqId =this.currentJoueur.equipe!.idEq!;
+      });
+
+      
+
     this.myform = this.formBuilder.group({
       idJoueur: ['', [Validators.required]],
       nomJoueur: [null, [Validators.required, Validators.minLength(3)]],
@@ -33,19 +51,14 @@ export class UpdateJoueurComponent implements OnInit {
       position: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
     });
+  }
 
-    this.currentJoueur = this.joueurService.consulterJoueur(
-      this.activatedRoute.snapshot.params['id']
-    );
-    this.updateEqId = this.currentJoueur.equipe?.idEq ?? 0;
-    console.log(this.currentJoueur);
-  }
   updateJoueur() {
-    //console.log(this.currentJoueur);
-    this.currentJoueur.equipe = this.joueurService.consulterEquipe(
-      this.updateEqId
-    );
-    this.joueurService.updateJoueur(this.currentJoueur);
-    this.router.navigate(['joueurs']);
+    console.log(this.updateEqId);
+    this.currentJoueur.equipe = this.equipes.find(eq => eq.idEq == this.updateEqId)!;
+    this.joueurService.updateJoueur(this.currentJoueur).subscribe(() => {
+      this.router.navigate(['joueurs']);
+    });
   }
+  
 }

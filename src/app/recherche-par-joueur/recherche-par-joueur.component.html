@@ -48,13 +48,17 @@
                 <td>{{ joueur.equipe?.nomEq }}</td>
                 <td>{{ joueur.position }}</td>
 
-                <!-- <td>
-                  <a class="btn btn-danger" (click)="supprimerJoueur(joueur)"
-                    >Supprimer</a
-                  >
-                </td>   -->
                 <td>
                   <a
+                    *ngIf="authService.isAdmin()"
+                    class="btn btn-danger"
+                    (click)="supprimerJoueur(joueur)"
+                    >Supprimer</a
+                  >
+                </td>
+                <td>
+                  <a
+                    *ngIf="authService.isAdmin()"
                     class="btn btn-success"
                     [routerLink]="['/updateJoueur', joueur.idJoueur]"
                     >Modifier</a

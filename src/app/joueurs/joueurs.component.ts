@@ -8,23 +8,39 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './joueurs.component.html',
 })
 export class JoueursComponent implements OnInit {
-  joueurs?: Joueur[];
+  joueurs?: Joueur[] = [];
   currentJoueur?: Joueur;
   constructor(
     private joueurService: JoueurService,
     public authService: AuthService
-  ) {}
+  ) {
+    // this.joueurs = this.joueurService.listeJoueurs();
+  }
 
   ngOnInit(): void {
-    this.joueurs = this.joueurService.listeJoueurs();
+    this.joueurService.listeJoueurs().subscribe((jou) => {
+      console.log(jou);
+      this.joueurs = jou;
+    });
+  }
+
+  chargerJoueurs() {
+    this.joueurService.listeJoueurs().subscribe((jou) => {
+      console.log(jou);
+      this.joueurs = jou;
+    });
   }
   supprimerJoueur(j: Joueur) {
-    //console.log(j);
-    let conf = confirm('Etes-vous sûr ?');
-    if (conf) this.joueurService.supprimerJoueur(j);
-  }
-  updateJoueur(j: Joueur) {
-    this.currentJoueur = j; // Assign the joueur to currentJoueur
-    this.joueurService.updateJoueur(this.currentJoueur);
+    if (j.idJoueur !== undefined) {
+      let conf = confirm('Etes-vous sûr ?');
+      if (conf) {
+        this.joueurService.supprimerJoueur(j.idJoueur).subscribe(() => {
+          console.log('joueur supprimer');
+          this.chargerJoueurs();
+        });
+      }
+    } else {
+      console.error("L'ID du joueur est indéfini");
+    }
   }
 }

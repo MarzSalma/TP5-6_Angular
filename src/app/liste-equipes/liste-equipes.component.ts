@@ -22,35 +22,46 @@ export class ListeEquipesComponent implements OnInit {
   constructor(private joueurService: JoueurService) {}
 
   ngOnInit(): void {
-    this.chargerEquipes();
+    this.joueurService.listeEquipes().
+    subscribe(eq => {this.equipes = eq._embedded.equipes;
+    console.log(eq);
+    });
+    
   }
 
   ajouterEquipe(nouvelleEquipe: Equipe): void {
-    this.joueurService.ajouterEquipe(nouvelleEquipe);
+   // this.joueurService.ajouterEquipe(nouvelleEquipe);
     this.chargerEquipes(); // Actualise l'affichage de la liste après l'ajout
   }
-
-  equipeUpdated(equipe: Equipe): void {
-    console.log('Équipe reçue du composant updatedequipe:', equipe);
-    if (this.ajout) {
-      // Ajout de la nouvelle équipe
-      this.joueurService.ajouterEquipe(equipe);
-    } else {
-      // Modification de l'équipe existante
-      const index = this.equipes.findIndex((e) => e.idEq === equipe.idEq);
-      if (index !== -1) {
-        this.equipes[index] = equipe;
-      }
-      this.ajout = true; // Retourne en mode ajout
-    }
-
-    // Actualise la liste des équipes
-    this.chargerEquipes();
-    this.resetEquipe(); // Réinitialise les champs pour un nouvel ajout/modification
+  equipeUpdated(eq:Equipe){
+    console.log("Eq updated event", eq);
+    this.joueurService.ajouterEquipe(eq).subscribe(()=>this.chargerEquipes());
   }
 
-  chargerEquipes(): void {
-    this.equipes = this.joueurService.listeEquipes();
+  // equipeUpdated(equipe: Equipe): void {
+  //   console.log('Équipe reçue du composant updatedequipe:', equipe);
+  //   if (this.ajout) {
+  //     // Ajout de la nouvelle équipe
+  //     //this.joueurService.ajouterEquipe(equipe);
+  //   } else {
+  //     // Modification de l'équipe existante
+  //     const index = this.equipes.findIndex((e) => e.idEq === equipe.idEq);
+  //     if (index !== -1) {
+  //       this.equipes[index] = equipe;
+  //     }
+  //     this.ajout = true; // Retourne en mode ajout
+  //   }
+
+  //   // Actualise la liste des équipes
+  //   this.chargerEquipes();
+  //   this.resetEquipe(); // Réinitialise les champs pour un nouvel ajout/modification
+  // }
+
+  chargerEquipes() {
+    this.joueurService.listeEquipes().subscribe(eq=>{this.equipes = eq._embedded.equipes;
+      console.log(eq);
+    })
+   // this.equipes = this.joueurService.listeEquipes();
     console.log(this.equipes);
   }
 

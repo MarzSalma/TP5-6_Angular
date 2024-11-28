@@ -7,17 +7,20 @@
   </head>
   <body>
     <div class="container">
-
       <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
         <label>Equipe </label>
-        <select class="form-control form-control-lg" id="idEq" name="idEq"
-        [(ngModel)]="IdEquipe" (change)="onChange()">
-        
-        <option *ngFor="let equipe of equipes" value="{{equipe.idEq}}">
-        {{equipe.nomEq}}
-        </option>
+        <select
+          class="form-control form-control-lg"
+          id="idEq"
+          name="idEq"
+          [(ngModel)]="IdEquipe"
+          (change)="onChange()"
+        >
+          <option *ngFor="let equipe of equipes" value="{{ equipe.idEq }}">
+            {{ equipe.nomEq }}
+          </option>
         </select>
-        </div>
+      </div>
 
       <div class="card shadow mb-4">
         <div class="card-body">
@@ -37,13 +40,17 @@
                 <td>{{ joueur.equipe?.nomEq }}</td>
                 <td>{{ joueur.position }}</td>
 
-               <td>
-                  <a class="btn btn-danger" (click)="supprimerJoueur(joueur)"
-                    >Supprimer</a
-                  >
-                </td>  
                 <td>
                   <a
+                    *ngIf="authService.isAdmin()"
+                    class="btn btn-danger"
+                    (click)="supprimerJoueur(joueur)"
+                    >Supprimer</a
+                  >
+                </td>
+                <td>
+                  <a
+                    *ngIf="authService.isAdmin()"
                     class="btn btn-success"
                     [routerLink]="['/updateJoueur', joueur.idJoueur]"
                     >Modifier</a
